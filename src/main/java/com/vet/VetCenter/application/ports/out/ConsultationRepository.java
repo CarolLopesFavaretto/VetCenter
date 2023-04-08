@@ -1,4 +1,4 @@
-package com.vet.VetCenter.application.ports.in;
+package com.vet.VetCenter.application.ports.out;
 
 import com.vet.VetCenter.domain.entity.Consultation;
 

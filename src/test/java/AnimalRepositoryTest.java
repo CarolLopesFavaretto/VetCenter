@@ -1,23 +1,13 @@
 import com.vet.VetCenter.Config.PostgreSQLContainerTest;
-import com.vet.VetCenter.application.ports.in.AnimalRepository;
+import com.vet.VetCenter.application.ports.out.AnimalRepository;
 import com.vet.VetCenter.domain.entity.Animal;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.SpringBootConfiguration;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.testcontainers.junit.jupiter.Testcontainers;
 
 
 //@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)

@@ -1,4 +1,4 @@
-package com.vet.VetCenter.application.ports.in;
+package com.vet.VetCenter.application.ports.out;
 
 import com.vet.VetCenter.domain.entity.Animal;
 import org.springframework.stereotype.Repository;
@@ -14,9 +14,9 @@ public interface AnimalRepository {
 
     Optional<Animal> findById( Long id);
 
-    Animal update(Animal animal, Long id);
+    int update(Animal animal);
 
-    void deleteById(Long id);
+    int deleteById(Long id);
 
 
 }
