@@ -1,5 +1,5 @@
 import com.vet.VetCenter.Config.PostgreSQLContainerTest;
-import com.vet.VetCenter.application.ports.in.AnimalRepository;
+import com.vet.VetCenter.application.ports.out.AnimalRepository;
 import com.vet.VetCenter.domain.entity.Animal;
 import org.junit.Assert;
 import org.junit.Test;
