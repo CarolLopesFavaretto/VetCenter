@@ -6,10 +6,11 @@ CREATE TABLE public.consultation (
 	observations varchar(255) NOT NULL,
 	"date" timestamp NOT NULL,
 	regress bool NOT NULL,
-	prescription_id bigserial NOT NULL,
+	animal_id bigserial NOT NULL,
 	CONSTRAINT consultation_pkey PRIMARY KEY (id)
 );
 
+
 -- public.consultation foreign keys
 
-ALTER TABLE public.consultation ADD CONSTRAINT consultation_prescription_id_fkey FOREIGN KEY (prescription_id) REFERENCES public.prescription(id);
+ALTER TABLE public.consultation ADD CONSTRAINT consultation_animal_id_fkey FOREIGN KEY (animal_id) REFERENCES public.animal(id);

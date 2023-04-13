@@ -14,5 +14,6 @@ public class Animal {
     private Integer age;
     private String type;
     private String race;
+    private Long guardianId;
 
 }

@@ -18,5 +18,6 @@ public interface AnimalRepository {
 
     int deleteById(Long id);
 
+    int deleteAll();
 
 }

@@ -1,4 +1,4 @@
-package com.vet.VetCenter.Config;
+package com.vet.VetCenter.config;
 
 import com.vet.VetCenter.VetCenterApplication;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;

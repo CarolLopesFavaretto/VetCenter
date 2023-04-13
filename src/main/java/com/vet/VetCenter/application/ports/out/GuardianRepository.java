@@ -1,19 +1,21 @@
 package com.vet.VetCenter.application.ports.out;
 
 import com.vet.VetCenter.domain.entity.Guardian;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 public interface GuardianRepository {
 
-    Guardian save(Guardian guardian);
+    int save(Guardian guardian);
 
     List<Guardian> findAll();
 
     Optional<Guardian> findById(Long id);
 
-    Guardian update(Guardian guardian, Long id);
+    int update(Guardian guardian);
 
-    void deleteById(Long id);
+    int deleteById(Long id);
 }

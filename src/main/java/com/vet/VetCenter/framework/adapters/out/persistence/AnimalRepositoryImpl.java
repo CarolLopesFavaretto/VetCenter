@@ -27,27 +27,32 @@ public class AnimalRepositoryImpl implements AnimalRepository {
 
     @Override
     public List<Animal> findAll() {
-        return namedParameterJdbcTemplate.query("select * from animal",
+        return namedParameterJdbcTemplate.query("select id, name, age, type, race, guardian_id " +
+                        "from animal" ,
                 ((rs, rowNum) ->
                         new Animal(
                                 rs.getLong("id"),
                                 rs.getString("name"),
                                 rs.getInt("age"),
                                 rs.getString("type"),
-                                rs.getString("race"))));
+                                rs.getString("race"),
+                                rs.getLong("guardian_id")
+                        )));
     }
 
     @Override
     public Optional<Animal> findById(Long id) {
-        return namedParameterJdbcTemplate.queryForObject("select * from animal where id = :id",
+        return namedParameterJdbcTemplate.query("select * from animal where id = :id",
                 new MapSqlParameterSource("id", id),
-                ((rs, rowNum) -> Optional.of(new Animal(
+                ((rs, rowNum) -> new Animal(
                         rs.getLong("id"),
                         rs.getString("name"),
                         rs.getInt("age"),
                         rs.getString("type"),
-                        rs.getString("race")
-                ))));
+                        rs.getString("race"),
+                        rs.getLong("guardian_id")
+                ))).stream()
+                .findFirst();
     }
 
     @Override
@@ -58,7 +63,16 @@ public class AnimalRepositoryImpl implements AnimalRepository {
 
     @Override
     public int deleteById(Long id) {
-        return namedParameterJdbcTemplate.update("delete animal where id = :id",
-                new BeanPropertySqlParameterSource(id));
+        MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
+        mapSqlParameterSource.addValue("id", id);
+
+        return namedParameterJdbcTemplate.update("delete from animal where id = :id",
+                mapSqlParameterSource);
+    }
+
+    @Override
+    public int deleteAll() {
+        return namedParameterJdbcTemplate.update("delete from animal",
+                new MapSqlParameterSource());
     }
 }
