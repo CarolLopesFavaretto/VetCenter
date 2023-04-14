@@ -1,7 +1,10 @@
 package com.vet.VetCenter.data;
 
 import com.vet.VetCenter.domain.entity.Animal;
+import com.vet.VetCenter.domain.entity.Consultation;
 import com.vet.VetCenter.domain.entity.Guardian;
+
+import java.time.LocalDate;
 
 public class VetCenterData {
 
@@ -23,6 +26,19 @@ public class VetCenterData {
         animal.setRace("Tomba Lata");
         animal.setGuardianId(getGuardian().getId());
         return animal;
+    }
+
+    public static Consultation getConsultation() {
+        Consultation consultation = new Consultation();
+        consultation.setId(1L);
+        consultation.setNameVeterinary("Maria");
+        consultation.setCause("coluna");
+        consultation.setDate(LocalDate.now());
+        consultation.setObservations("raio-x realizado");
+        consultation.setValue(80.00);
+        consultation.setRegress(true);
+        consultation.setAnimalId(getAnimal().getId());
+        return consultation;
     }
 
 

@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor
@@ -14,10 +14,10 @@ public class Consultation {
 
     private Long id;
     private String nameVeterinary;
-    private BigDecimal value;
+    private Double value;
     private String cause;
     private String observations;
-    private LocalDateTime date;
+    private LocalDate date;
     private Boolean regress;
-
+    private Long animalId;
 }
