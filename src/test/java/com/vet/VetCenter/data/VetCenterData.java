@@ -3,6 +3,7 @@ package com.vet.VetCenter.data;
 import com.vet.VetCenter.domain.entity.Animal;
 import com.vet.VetCenter.domain.entity.Consultation;
 import com.vet.VetCenter.domain.entity.Guardian;
+import com.vet.VetCenter.domain.entity.Prescription;
 
 import java.time.LocalDate;
 
@@ -39,6 +40,15 @@ public class VetCenterData {
         consultation.setRegress(true);
         consultation.setAnimalId(getAnimal().getId());
         return consultation;
+    }
+
+    public static Prescription getPrescription() {
+        Prescription prescription = new Prescription();
+        prescription.setId(1L);
+        prescription.setMedication("Dipirona");
+        prescription.setDate(LocalDate.now());
+        prescription.setConsultation_id(getConsultation().getId());
+        return prescription;
     }
 
 

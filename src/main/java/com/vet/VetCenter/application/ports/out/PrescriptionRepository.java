@@ -7,13 +7,13 @@ import java.util.Optional;
 
 public interface PrescriptionRepository {
 
-    Prescription save(Prescription prescription);
+    int save(Prescription prescription);
 
     List<Prescription> findAll();
 
     Optional<Prescription> findById(Long id);
 
-    Prescription update(Prescription prescription, Long id);
+    int update(Prescription prescription);
 
-    void deleteById (Long id);
+    int deleteById (Long id);
 }

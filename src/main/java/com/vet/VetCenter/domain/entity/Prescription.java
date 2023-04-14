@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor
@@ -13,6 +13,7 @@ public class Prescription {
 
     private Long id;
     private String medication;
-    private LocalDateTime date;
+    private LocalDate date;
+    private Long consultation_id;
 
 }
