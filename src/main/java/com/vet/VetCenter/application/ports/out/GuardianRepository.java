@@ -9,13 +9,13 @@ import java.util.Optional;
 @Repository
 public interface GuardianRepository {
 
-    int save(Guardian guardian);
+    void save(Guardian guardian);
 
     List<Guardian> findAll();
 
     Optional<Guardian> findById(Long id);
 
-    int update(Guardian guardian);
+    void update(Guardian guardian);
 
-    int deleteById(Long id);
+    void deleteById(Long id);
 }

@@ -20,8 +20,8 @@ public class GuardianRepositoryImpl implements GuardianRepository {
 
 
     @Override
-    public int save(Guardian guardian) {
-        return namedParameterJdbcTemplate.update("insert into guardian (name, cpf, telephone) " +
+    public void save(Guardian guardian) {
+        namedParameterJdbcTemplate.update("insert into guardian (name, cpf, telephone) " +
                 "values (:name, :cpf, :telephone)", new BeanPropertySqlParameterSource(guardian));
     }
 
@@ -52,17 +52,17 @@ public class GuardianRepositoryImpl implements GuardianRepository {
     }
 
     @Override
-    public int update(Guardian guardian) {
-        return namedParameterJdbcTemplate.update("update guardian set telephone = :telephone where id = :id"
+    public void update(Guardian guardian) {
+         namedParameterJdbcTemplate.update("update guardian set telephone = :telephone where id = :id"
                 , new BeanPropertySqlParameterSource(guardian));
     }
 
     @Override
-    public int deleteById(Long id) {
+    public void deleteById(Long id) {
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
         mapSqlParameterSource.addValue("id", id);
 
-        return namedParameterJdbcTemplate.update("delete from guardian where id = :id"
+         namedParameterJdbcTemplate.update("delete from guardian where id = :id"
                 , mapSqlParameterSource);
     }
 }

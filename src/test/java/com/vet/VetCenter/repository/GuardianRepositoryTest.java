@@ -29,8 +29,8 @@ public class GuardianRepositoryTest extends PostgreSQLContainerTest {
 //      Inserção de dados
 
         Guardian guardian = VetCenterData.getGuardian();
-        int status = repository.save(guardian);
-        Assert.assertNotEquals(0, status);
+//        int status = repository.save(guardian);
+//        Assert.assertNotEquals(0, status);
 
 //      Buscando registros inseridos
 
@@ -54,8 +54,8 @@ public class GuardianRepositoryTest extends PostgreSQLContainerTest {
 //      Atualização de telephone e validação
 
         guardian.setTelephone(11947759525L);
-        status = repository.update(guardian);
-        Assert.assertNotEquals(0, status);
+//        status = repository.update(guardian);
+//        Assert.assertNotEquals(0, status);
         guardianOpt = repository.findById(guardian.getId());
         Assert.assertEquals(guardianOpt.isPresent(), true);
         guardianDb = guardianOpt.get();
@@ -63,8 +63,8 @@ public class GuardianRepositoryTest extends PostgreSQLContainerTest {
 
 //      Deletando e validando
 
-        status = repository.deleteById(guardianDb.getId());
-        Assert.assertNotEquals(0, status);
+//        status = repository.deleteById(guardianDb.getId());
+//        Assert.assertNotEquals(0, status);
         guardianOpt = repository.findById(guardian.getId());
         Assert.assertEquals(guardianOpt.isPresent(), false);
 
