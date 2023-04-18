@@ -39,16 +39,17 @@ public class GuardianServiceImpl implements GuardianService {
     @Override
     public void update(Long id, GuardianRequest request) {
         repository.findById(id).map(guardian -> {
+            guardian.setName(request.getName());
+            guardian.setCpf(request.getCpf());
             guardian.setTelephone(request.getTelephone());
             repository.update(guardian);
             return Optional.of(mapper.toModel(guardian));
 
         }).orElse(Optional.empty());
-
     }
 
     @Override
     public void deleteById(Long id) {
-
+        repository.deleteById(id);
     }
 }

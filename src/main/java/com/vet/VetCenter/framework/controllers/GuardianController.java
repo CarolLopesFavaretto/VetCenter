@@ -45,8 +45,14 @@ public class GuardianController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity updateGuardian (@PathVariable Long id, @RequestBody GuardianRequest request){
+    public ResponseEntity updateGuardian(@PathVariable Long id, @RequestBody GuardianRequest request) {
         guardianService.update(id, request);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteGuardian(@PathVariable Long id) {
+        guardianService.deleteById(id);
     }
 }

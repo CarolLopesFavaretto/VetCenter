@@ -53,7 +53,7 @@ public class GuardianRepositoryImpl implements GuardianRepository {
 
     @Override
     public void update(Guardian guardian) {
-         namedParameterJdbcTemplate.update("update guardian set telephone = :telephone where id = :id"
+         namedParameterJdbcTemplate.update("update guardian set name = :name, cpf = :cpf, telephone = :telephone where id = :id"
                 , new BeanPropertySqlParameterSource(guardian));
     }
 
