@@ -20,15 +20,16 @@ public class AnimalRepositoryImpl implements AnimalRepository {
 
 
     @Override
-    public int save(Animal animal) {
-        return namedParameterJdbcTemplate.update("insert into animal (name, age, type, race) values (:name, :age, :type, :race)"
+    public void save(Animal animal) {
+        namedParameterJdbcTemplate.update("insert into animal (name, age, type, race, guardian_id ) " +
+                        "values (:name, :age, :type, :race, :guardianId)"
                 , new BeanPropertySqlParameterSource(animal));
     }
 
     @Override
     public List<Animal> findAll() {
         return namedParameterJdbcTemplate.query("select id, name, age, type, race, guardian_id " +
-                        "from animal" ,
+                        "from animal",
                 ((rs, rowNum) ->
                         new Animal(
                                 rs.getLong("id"),
@@ -43,36 +44,31 @@ public class AnimalRepositoryImpl implements AnimalRepository {
     @Override
     public Optional<Animal> findById(Long id) {
         return namedParameterJdbcTemplate.query("select * from animal where id = :id",
-                new MapSqlParameterSource("id", id),
-                ((rs, rowNum) -> new Animal(
-                        rs.getLong("id"),
-                        rs.getString("name"),
-                        rs.getInt("age"),
-                        rs.getString("type"),
-                        rs.getString("race"),
-                        rs.getLong("guardian_id")
-                ))).stream()
+                        new MapSqlParameterSource("id", id),
+                        ((rs, rowNum) -> new Animal(
+                                rs.getLong("id"),
+                                rs.getString("name"),
+                                rs.getInt("age"),
+                                rs.getString("type"),
+                                rs.getString("race"),
+                                rs.getLong("guardian_id")
+                        ))).stream()
                 .findFirst();
     }
 
     @Override
-    public int update(Animal animal) {
-        return namedParameterJdbcTemplate.update("update animal set age = :age where id = :id",
+    public void update(Animal animal) {
+        namedParameterJdbcTemplate.update("update animal set age = :age, name = :name, race = " +
+                        ":race, type = :type, guardian_id = :guardianId where id = :id",
                 new BeanPropertySqlParameterSource(animal));
     }
 
     @Override
-    public int deleteById(Long id) {
+    public void deleteById(Long id) {
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
         mapSqlParameterSource.addValue("id", id);
 
-        return namedParameterJdbcTemplate.update("delete from animal where id = :id",
+        namedParameterJdbcTemplate.update("delete from animal where id = :id",
                 mapSqlParameterSource);
-    }
-
-    @Override
-    public int deleteAll() {
-        return namedParameterJdbcTemplate.update("delete from animal",
-                new MapSqlParameterSource());
     }
 }

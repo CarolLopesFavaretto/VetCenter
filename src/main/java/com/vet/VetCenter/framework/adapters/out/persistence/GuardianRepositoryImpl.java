@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
-
 @Repository
 public class GuardianRepositoryImpl implements GuardianRepository {
 
@@ -53,7 +52,7 @@ public class GuardianRepositoryImpl implements GuardianRepository {
 
     @Override
     public void update(Guardian guardian) {
-         namedParameterJdbcTemplate.update("update guardian set name = :name, cpf = :cpf, telephone = :telephone where id = :id"
+        namedParameterJdbcTemplate.update("update guardian set name = :name, cpf = :cpf, telephone = :telephone where id = :id"
                 , new BeanPropertySqlParameterSource(guardian));
     }
 
@@ -62,7 +61,7 @@ public class GuardianRepositoryImpl implements GuardianRepository {
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
         mapSqlParameterSource.addValue("id", id);
 
-         namedParameterJdbcTemplate.update("delete from guardian where id = :id"
+        namedParameterJdbcTemplate.update("delete from guardian where id = :id"
                 , mapSqlParameterSource);
     }
 }

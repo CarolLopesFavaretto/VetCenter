@@ -41,8 +41,7 @@ public class AnimalRepositoryTest extends PostgreSQLContainerTest {
 //      testando inserção no banco
 
         Animal animal = VetCenterData.getAnimal();
-        int status = repository.save(animal);
-        Assert.assertNotEquals(0, status);
+        repository.save(animal);
 
 //      buscando registros inseridos
 
@@ -69,8 +68,7 @@ public class AnimalRepositoryTest extends PostgreSQLContainerTest {
 //      atualizando age e validando
 
         animal.setAge(12);
-        status = repository.update(animal);
-        Assert.assertNotEquals(0, status);
+        repository.update(animal);
         animalOpt = repository.findById(animal.getId());
         Assert.assertEquals(animalOpt.isPresent(), true);
         animalDb = animalOpt.get();
@@ -78,8 +76,7 @@ public class AnimalRepositoryTest extends PostgreSQLContainerTest {
 
 //        deletando e validando
 
-        status = repository.deleteById(animalDb.getId());
-        Assert.assertNotEquals(0, status);
+        repository.deleteById(animalDb.getId());
         animalOpt = repository.findById(animal.getId());
         Assert.assertEquals(animalOpt.isPresent(), false);
     }

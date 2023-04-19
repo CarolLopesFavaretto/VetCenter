@@ -39,15 +39,15 @@ public class GuardianController {
     }
 
     @PostMapping
-    public ResponseEntity createGuardian(@RequestBody Guardian request) {
+    @ResponseStatus(HttpStatus.CREATED)
+    public void createGuardian(@RequestBody Guardian request) {
         guardianService.create(request);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity updateGuardian(@PathVariable Long id, @RequestBody GuardianRequest request) {
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updateGuardian(@PathVariable Long id, @RequestBody GuardianRequest request) {
         guardianService.update(id, request);
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
     @DeleteMapping("/{id}")

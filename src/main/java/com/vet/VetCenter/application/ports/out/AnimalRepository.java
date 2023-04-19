@@ -1,23 +1,19 @@
 package com.vet.VetCenter.application.ports.out;
 
 import com.vet.VetCenter.domain.entity.Animal;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
-@Repository
+
 public interface AnimalRepository {
 
-    int save(Animal animal);
+    void save(Animal animal);
 
     List<Animal> findAll();
 
-    Optional<Animal> findById( Long id);
+    Optional<Animal> findById(Long id);
 
-    int update(Animal animal);
+    void update(Animal animal);
 
-    int deleteById(Long id);
-
-    int deleteAll();
-
+    void deleteById(Long id);
 }

@@ -6,15 +6,16 @@ import com.vet.VetCenter.framework.adapters.in.dtos.request.AnimalRequest;
 import java.util.List;
 import java.util.Optional;
 
+
 public interface AnimalService {
 
-    Animal create(AnimalRequest request);
+    void create(Animal request);
 
     List<Animal> findAll();
 
     Optional<Animal> findById(Long id);
 
-    Animal update(Long id, AnimalRequest request);
+    void update(Long id, AnimalRequest request);
 
-    void deleteById (Long id);
+    void deleteById(Long id);
 }
