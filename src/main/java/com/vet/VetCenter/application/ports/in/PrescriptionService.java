@@ -8,13 +8,13 @@ import java.util.Optional;
 
 public interface PrescriptionService {
 
-    Prescription create(PrescriptionRequest request);
+    void create(Prescription prescription);
 
     List<Prescription> findAll();
 
     Optional<Prescription> findById(Long id);
 
-    Prescription update(Long id, PrescriptionRequest request);
+    void update(Long id, PrescriptionRequest request);
 
     void deleteById(Long id);
 }

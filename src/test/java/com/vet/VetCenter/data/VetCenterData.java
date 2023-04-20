@@ -47,7 +47,7 @@ public class VetCenterData {
         prescription.setId(1L);
         prescription.setMedication("Dipirona");
         prescription.setDate(LocalDate.now());
-        prescription.setConsultation_id(getConsultation().getId());
+        prescription.setConsultationId(getConsultation().getId());
         return prescription;
     }
 

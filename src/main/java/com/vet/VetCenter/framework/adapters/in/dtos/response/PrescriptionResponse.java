@@ -16,5 +16,5 @@ public class PrescriptionResponse {
     private Long id;
     private String medication;
     private LocalDate date;
-    private Long consultation_id;
+    private Long consultationId;
 }

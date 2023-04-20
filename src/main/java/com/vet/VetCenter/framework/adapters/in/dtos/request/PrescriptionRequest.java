@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -12,4 +14,6 @@ import lombok.NoArgsConstructor;
 public class PrescriptionRequest {
 
     private String medication;
+    private LocalDate date;
+    private Long consultationId;
 }

@@ -47,9 +47,7 @@ public class PrescriptionRepositoryTest extends PostgreSQLContainerTest {
     public void runTestPrescriptionCrud() {
 
         Prescription prescription = VetCenterData.getPrescription();
-
-        int status = repository.save(prescription);
-        Assert.assertNotEquals(0, status);
+        repository.save(prescription);
 
 //      buscando registros inseridos
 
@@ -58,7 +56,7 @@ public class PrescriptionRepositoryTest extends PostgreSQLContainerTest {
         Prescription prescriptionDb = prescriptions.get(0);
         Assert.assertEquals(prescriptionDb.getMedication(), prescription.getMedication());
         Assert.assertEquals(prescriptionDb.getDate(), prescription.getDate());
-        Assert.assertEquals(prescriptionDb.getConsultation_id(), prescription.getConsultation_id());
+        Assert.assertEquals(prescriptionDb.getConsultationId(), prescription.getConsultationId());
 
 //      buscando por id
 
@@ -67,22 +65,22 @@ public class PrescriptionRepositoryTest extends PostgreSQLContainerTest {
         prescriptionDb = prescriptions.get(0);
         Assert.assertEquals(prescriptionDb.getMedication(), prescription.getMedication());
         Assert.assertEquals(prescriptionDb.getDate(), prescription.getDate());
-        Assert.assertEquals(prescriptionDb.getConsultation_id(), prescription.getConsultation_id());
+        Assert.assertEquals(prescriptionDb.getConsultationId(), prescription.getConsultationId());
 
 //      atualizando age e validando
 
         prescription.setMedication("Tramal");
-        status = repository.update(prescription);
-        Assert.assertNotEquals(0, status);
+        repository.update(prescription);
         prescriptionOpt = repository.findById(prescription.getId());
         Assert.assertEquals(prescriptionOpt.isPresent(), true);
         prescriptionDb = prescriptionOpt.get();
         Assert.assertEquals(prescriptionDb.getMedication(), prescription.getMedication());
+        Assert.assertEquals(prescriptionDb.getDate(), prescription.getDate());
+        Assert.assertEquals(prescriptionDb.getConsultationId(), prescription.getConsultationId());
 
 //      deletando e validando
 
-        status = repository.deleteById(prescriptionDb.getId());
-        Assert.assertNotEquals(0, status);
+        repository.deleteById(prescriptionDb.getId());
         prescriptionOpt = repository.findById(prescription.getId());
         Assert.assertEquals(prescriptionOpt.isPresent(), false);
     }

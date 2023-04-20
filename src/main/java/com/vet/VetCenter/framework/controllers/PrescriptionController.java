@@ -1,8 +1,8 @@
 package com.vet.VetCenter.framework.controllers;
 
-import com.vet.VetCenter.application.ports.in.AnimalService;
-import com.vet.VetCenter.domain.entity.Animal;
-import com.vet.VetCenter.framework.adapters.in.dtos.request.AnimalRequest;
+import com.vet.VetCenter.application.ports.in.PrescriptionService;
+import com.vet.VetCenter.domain.entity.Prescription;
+import com.vet.VetCenter.framework.adapters.in.dtos.request.PrescriptionRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,20 +12,20 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/animal")
-public class AnimalController {
+@RequestMapping("/prescription")
+public class PrescriptionController {
 
     @Autowired
-    private AnimalService service;
+    private PrescriptionService service;
 
     @GetMapping
-    public List<Animal> listAll() {
+    public List<Prescription> findAll() {
         return service.findAll();
     }
 
     @GetMapping("/{id}")
     public ResponseEntity findById(@PathVariable Long id) {
-        Optional<Animal> byId = service.findById(id);
+        Optional<Prescription> byId = service.findById(id);
         if (byId.isPresent()) {
             return ResponseEntity.ok().body(byId);
         } else {
@@ -35,19 +35,20 @@ public class AnimalController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void createAnimal(@RequestBody Animal animal) {
-        service.create(animal);
+    public void createPrescription(@RequestBody Prescription prescription) {
+        service.create(prescription);
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateAnimal(@PathVariable Long id, @RequestBody AnimalRequest request) {
+    public void updatePrescription(@PathVariable Long id, @RequestBody PrescriptionRequest request) {
         service.update(id, request);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateAnimal(@PathVariable Long id) {
+    public void deletePrescription(@PathVariable Long id) {
         service.deleteById(id);
     }
+
 }

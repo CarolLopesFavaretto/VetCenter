@@ -19,9 +19,9 @@ public class PrescriptionRepositoryImpl implements PrescriptionRepository {
     NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     @Override
-    public int save(Prescription prescription) {
-        return namedParameterJdbcTemplate.update("insert into prescription (medication, date) values " +
-                "(:medication, :date)", new BeanPropertySqlParameterSource(prescription));
+    public void save(Prescription prescription) {
+        namedParameterJdbcTemplate.update("insert into prescription (medication, date, consultation_id) values " +
+                "(:medication, :date, :consultationId)", new BeanPropertySqlParameterSource(prescription));
     }
 
     @Override
@@ -49,16 +49,17 @@ public class PrescriptionRepositoryImpl implements PrescriptionRepository {
     }
 
     @Override
-    public int update(Prescription prescription) {
-        return namedParameterJdbcTemplate.update("update prescription set medication = :medication where id = :id",
+    public void update(Prescription prescription) {
+        namedParameterJdbcTemplate.update("update prescription set medication = :medication, " +
+                        "consultation_id = :consultationId where id = :id",
                 new BeanPropertySqlParameterSource(prescription));
     }
 
     @Override
-    public int deleteById(Long id) {
+    public void deleteById(Long id) {
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
         mapSqlParameterSource.addValue("id", id);
-        return namedParameterJdbcTemplate.update("delete from prescription where id = :id",
+        namedParameterJdbcTemplate.update("delete from prescription where id = :id",
                 mapSqlParameterSource);
     }
 }
