@@ -7,13 +7,13 @@ import java.util.Optional;
 
 public interface ConsultationRepository {
 
-    int save(Consultation consultation);
+    void save(Consultation consultation);
 
     List<Consultation> findAll();
 
     Optional<Consultation> findById(Long id);
 
-    int update(Consultation consultation);
+    void update(Consultation consultation);
 
-    int deleteById(Long id);
+    void deleteById(Long id);
 }

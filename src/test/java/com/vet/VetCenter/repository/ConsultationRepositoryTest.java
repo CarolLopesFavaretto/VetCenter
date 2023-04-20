@@ -41,9 +41,7 @@ public class ConsultationRepositoryTest extends PostgreSQLContainerTest {
     @Test
     public void runTestConsultationCrud() {
         Consultation consultation = VetCenterData.getConsultation();
-
-        int status = repository.save(consultation);
-        Assert.assertNotEquals(0, status);
+        repository.save(consultation);
 
 //      buscando registros inseridos
 
@@ -75,8 +73,7 @@ public class ConsultationRepositoryTest extends PostgreSQLContainerTest {
 
         consultation.setValue(50.00);
         consultation.setRegress(false);
-        status = repository.update(consultation);
-        Assert.assertNotEquals(0, status);
+        repository.update(consultation);
         consultationOpt = repository.findById(consultation.getId());
         Assert.assertEquals(consultationOpt.isPresent(), true);
         consultationDb = consultationOpt.get();
@@ -84,8 +81,7 @@ public class ConsultationRepositoryTest extends PostgreSQLContainerTest {
 
 //      deletando e validando
 
-        status = repository.deleteById(consultationDb.getId());
-        Assert.assertNotEquals(0, status);
+        repository.deleteById(consultationDb.getId());
         consultationOpt = repository.findById(consultation.getId());
         Assert.assertEquals(consultationOpt.isPresent(), false);
     }

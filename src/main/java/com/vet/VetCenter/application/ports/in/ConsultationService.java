@@ -8,13 +8,13 @@ import java.util.Optional;
 
 public interface ConsultationService {
 
-    Consultation create(ConsultationRequest request);
+    void create(Consultation consultation);
 
     List<Consultation> findAll();
 
     Optional<Consultation> findById(Long id);
 
-    Consultation update(Long id, ConsultationRequest request);
+    void update(Long id, ConsultationRequest request);
 
     void deleteById(Long id);
 

@@ -16,4 +16,5 @@ public class ConsultationRequest {
     private String cause;
     private String observations;
     private Boolean regress;
+    private Long animalId;
 }

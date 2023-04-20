@@ -19,11 +19,11 @@ public class ConsultationRepositoryImpl implements ConsultationRepository {
 
 
     @Override
-    public int save(Consultation consultation) {
+    public void save(Consultation consultation) {
 
-        return namedParameterJdbcTemplate.update("insert into consultation (name_veterinary, value, cause, " +
-                        "observations, date, regress) values (:nameVeterinary, " +
-                        ":value, :cause, :observations, :date, :regress)"
+        namedParameterJdbcTemplate.update("insert into consultation (name_veterinary, value, cause, " +
+                        "observations, date, regress, animal_id) values (:nameVeterinary, " +
+                        ":value, :cause, :observations, :date, :regress, :animalId)"
                 , new BeanPropertySqlParameterSource(consultation));
     }
 
@@ -64,18 +64,18 @@ public class ConsultationRepositoryImpl implements ConsultationRepository {
     }
 
     @Override
-    public int update(Consultation consultation) {
-        return namedParameterJdbcTemplate.update("update consultation set regress = :regress and value = " +
-                        ":value where id = :id",
+    public void update(Consultation consultation) {
+        namedParameterJdbcTemplate.update("update consultation set regress = :regress, name_veterinary = :nameVeterinary, value = " +
+                        ":value, cause = :cause, observations = :observations, animal_id = :animalId  where id = :id",
                 new BeanPropertySqlParameterSource(consultation));
     }
 
     @Override
-    public int deleteById(Long id) {
+    public void deleteById(Long id) {
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
         mapSqlParameterSource.addValue("id", id);
 
-        return namedParameterJdbcTemplate.update("delete from consultation where id = :id",
+        namedParameterJdbcTemplate.update("delete from consultation where id = :id",
                 mapSqlParameterSource);
     }
 }
