@@ -14,7 +14,7 @@ public interface PrescriptionService {
 
     Optional<Prescription> findById(Long id);
 
-    void update(Long id, PrescriptionRequest request);
+    void update(Long id, PrescriptionRequest request) throws Exception;
 
     void deleteById(Long id);
 }

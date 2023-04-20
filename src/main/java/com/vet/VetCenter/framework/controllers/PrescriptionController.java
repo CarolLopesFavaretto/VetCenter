@@ -41,7 +41,7 @@ public class PrescriptionController {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updatePrescription(@PathVariable Long id, @RequestBody PrescriptionRequest request) {
+    public void updatePrescription(@PathVariable Long id, @RequestBody PrescriptionRequest request) throws Exception {
         service.update(id, request);
     }
 

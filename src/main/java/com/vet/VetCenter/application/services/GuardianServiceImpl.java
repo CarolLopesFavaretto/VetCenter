@@ -5,11 +5,13 @@ import com.vet.VetCenter.application.ports.out.GuardianRepository;
 import com.vet.VetCenter.domain.entity.Guardian;
 import com.vet.VetCenter.framework.adapters.in.dtos.mappers.GuardianMapper;
 import com.vet.VetCenter.framework.adapters.in.dtos.request.GuardianRequest;
+import com.vet.VetCenter.framework.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+
 @Service
 public class GuardianServiceImpl implements GuardianService {
 
@@ -44,7 +46,7 @@ public class GuardianServiceImpl implements GuardianService {
             repository.update(guardian);
             return Optional.of(mapper.toModel(guardian));
 
-        }).orElse(Optional.empty());
+        }).orElseThrow(() -> new ResourceNotFoundException("Recurso não encontrado"));
     }
 
     @Override

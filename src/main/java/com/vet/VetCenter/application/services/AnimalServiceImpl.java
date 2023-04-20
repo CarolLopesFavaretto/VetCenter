@@ -5,6 +5,7 @@ import com.vet.VetCenter.application.ports.out.AnimalRepository;
 import com.vet.VetCenter.domain.entity.Animal;
 import com.vet.VetCenter.framework.adapters.in.dtos.mappers.AnimalMapper;
 import com.vet.VetCenter.framework.adapters.in.dtos.request.AnimalRequest;
+import com.vet.VetCenter.framework.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -47,7 +48,7 @@ public class AnimalServiceImpl implements AnimalService {
             animal.setGuardianId(request.getGuardianId());
             repository.update(animal);
             return Optional.of(mapper.toModel(animal));
-        }).orElse(Optional.empty());
+        }).orElseThrow(() -> new ResourceNotFoundException("Recurso não encontrado"));
     }
 
     @Override

@@ -5,6 +5,7 @@ import com.vet.VetCenter.application.ports.out.PrescriptionRepository;
 import com.vet.VetCenter.domain.entity.Prescription;
 import com.vet.VetCenter.framework.adapters.in.dtos.mappers.PrescriptionMapper;
 import com.vet.VetCenter.framework.adapters.in.dtos.request.PrescriptionRequest;
+import com.vet.VetCenter.framework.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,7 +45,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
             prescription.setConsultationId(request.getConsultationId());
             repository.update(prescription);
             return Optional.of(mapper.toModel(prescription));
-        }).orElse(Optional.empty());
+        }).orElseThrow(() -> new ResourceNotFoundException("Recurso não encontrado"));
 
     }
 

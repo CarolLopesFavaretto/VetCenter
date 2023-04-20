@@ -5,6 +5,7 @@ import com.vet.VetCenter.application.ports.out.ConsultationRepository;
 import com.vet.VetCenter.domain.entity.Consultation;
 import com.vet.VetCenter.framework.adapters.in.dtos.mappers.ConsultationMapper;
 import com.vet.VetCenter.framework.adapters.in.dtos.request.ConsultationRequest;
+import com.vet.VetCenter.framework.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -48,7 +49,7 @@ public class ConsultationServiceImpl implements ConsultationService {
             consultation.getDate();
             repository.update(consultation);
             return Optional.of(mapper.toModel(consultation));
-        }).orElse(Optional.empty());
+        }).orElseThrow(() -> new ResourceNotFoundException("Recurso não encontrado"));
     }
 
     @Override
