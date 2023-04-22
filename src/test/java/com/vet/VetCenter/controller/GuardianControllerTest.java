@@ -19,7 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @AutoConfigureMockMvc
 @RunWith(SpringRunner.class)
-public class GuardianController extends PostgreSQLContainerTest {
+public class GuardianControllerTest extends PostgreSQLContainerTest {
 
     @Autowired
     private GuardianService service;
