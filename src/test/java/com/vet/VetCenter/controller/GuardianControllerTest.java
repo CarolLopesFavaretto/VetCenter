@@ -91,7 +91,8 @@ public class GuardianControllerTest extends PostgreSQLContainerTest {
         service.create(guardian);
 
         mvc.perform(MockMvcRequestBuilders
-                        .get("/guardian/{id}", 2)
+                        .get("/guardian/{id}", guardian.getId().toString())
+                        .content(objectMapper.writeValueAsString(guardian))
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
     }
