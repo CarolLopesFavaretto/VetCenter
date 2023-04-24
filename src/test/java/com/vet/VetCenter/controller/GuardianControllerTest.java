@@ -1,5 +1,6 @@
 package com.vet.VetCenter.controller;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vet.VetCenter.application.ports.in.GuardianService;
 import com.vet.VetCenter.config.PostgreSQLContainerTest;
@@ -13,6 +14,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
+import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -69,7 +72,19 @@ public class GuardianControllerTest extends PostgreSQLContainerTest {
         mvc.perform(MockMvcRequestBuilders
                         .get("/guardian")
                         .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(mvcResult -> {
+                    String contentAsString = mvcResult.getResponse().getContentAsString();
+                    List<Guardian> resp = objectMapper.readValue(contentAsString, new TypeReference<List<Guardian>>() {
+                    });
+                    for (Guardian guardianList : resp) {
+
+                        assertThat(resp.get(0));
+                        assertThat(guardianList.getName()).isEqualTo(guardian.getName());
+                        assertThat(guardianList.getCpf()).isEqualTo(guardian.getCpf());
+                        assertThat(guardianList.getTelephone()).isEqualTo(guardian.getTelephone());
+                    }
+                });
     }
 
     @Test

@@ -1,5 +1,6 @@
 package com.vet.VetCenter.controller;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vet.VetCenter.application.ports.in.AnimalService;
 import com.vet.VetCenter.application.ports.in.GuardianService;
@@ -15,6 +16,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
+import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -77,10 +80,26 @@ public class AnimalControllerTest extends PostgreSQLContainerTest {
         Animal animal = VetCenterData.getAnimal();
         service.create(animal);
 
+
         mvc.perform(MockMvcRequestBuilders
                         .get("/animal")
                         .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(mvcResult -> {
+                    String contentAsString = mvcResult.getResponse().getContentAsString();
+                    List<Animal> resp = objectMapper.readValue(contentAsString, new TypeReference<List<Animal>>() {
+                    });
+                    for (Animal animalList : resp) {
+
+                        assertThat(resp.get(0));
+                        assertThat(animalList.getName()).isEqualTo(animal.getName());
+                        assertThat(animalList.getAge()).isEqualTo(animal.getAge());
+                        assertThat(animalList.getRace()).isEqualTo(animal.getRace());
+                        assertThat(animalList.getType()).isEqualTo(animal.getType());
+                        assertThat(animalList.getGuardianId()).isEqualTo(animal.getGuardianId());
+                    }
+                });
+
     }
 
     @Test
@@ -102,7 +121,7 @@ public class AnimalControllerTest extends PostgreSQLContainerTest {
         service.create(animal);
 
         mvc.perform(MockMvcRequestBuilders
-                        .get("/animal/{id}",  5)
+                        .get("/animal/{id}", 5)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
     }

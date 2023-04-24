@@ -1,5 +1,6 @@
 package com.vet.VetCenter.controller;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vet.VetCenter.application.ports.in.AnimalService;
 import com.vet.VetCenter.application.ports.in.ConsultationService;
@@ -16,6 +17,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
+import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -87,7 +90,23 @@ public class ConsultationControllerTest extends PostgreSQLContainerTest {
         mvc.perform(MockMvcRequestBuilders
                         .get("/consultation")
                         .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(mvcResult -> {
+                    String contentAsString = mvcResult.getResponse().getContentAsString();
+                    List<Consultation> resp = objectMapper.readValue(contentAsString, new TypeReference<List<Consultation>>() {
+                    });
+                    for (Consultation consultationList : resp) {
+
+                        assertThat(resp.get(0));
+                        assertThat(consultationList.getNameVeterinary()).isEqualTo(consultation.getNameVeterinary());
+                        assertThat(consultationList.getCause()).isEqualTo(consultation.getCause());
+                        assertThat(consultationList.getValue()).isEqualTo(consultation.getValue());
+                        assertThat(consultationList.getObservations()).isEqualTo(consultation.getObservations());
+                        assertThat(consultationList.getDate()).isEqualTo(consultation.getDate());
+                        assertThat(consultationList.getRegress()).isEqualTo(consultation.getRegress());
+                        assertThat(consultationList.getAnimalId()).isEqualTo(consultation.getAnimalId());
+                    }
+                });
     }
 
     @Test
@@ -95,7 +114,7 @@ public class ConsultationControllerTest extends PostgreSQLContainerTest {
         Consultation consultation = VetCenterData.getConsultation();
         service.create(consultation);
 
-        mvc.perform(MockMvcRequestBuilders.put("/consultation/{id}", consultation.getId().toString())
+        mvc.perform(MockMvcRequestBuilders.put("/consultation/{id}", 4)
                         .content(objectMapper.writeValueAsString(consultation))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
