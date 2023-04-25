@@ -79,24 +79,28 @@ public class AnimalControllerTest extends PostgreSQLContainerTest {
     public void shouldFindAllAnimal() throws Exception {
         Animal animal = VetCenterData.getAnimal();
         service.create(animal);
-
+        animal.setName("Marie");
+        service.create(animal);
+        service.create(animal);
 
         mvc.perform(MockMvcRequestBuilders
                         .get("/animal")
+                        .param("name", "Marie")
+                        .param("guardianId", "1")
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(mvcResult -> {
                     String contentAsString = mvcResult.getResponse().getContentAsString();
                     List<Animal> resp = objectMapper.readValue(contentAsString, new TypeReference<List<Animal>>() {
                     });
-                    for (Animal animalList : resp) {
+                    assertThat(resp.size()).isEqualTo(2);
 
-                        assertThat(resp.get(0));
-                        assertThat(animalList.getName()).isEqualTo(animal.getName());
-                        assertThat(animalList.getAge()).isEqualTo(animal.getAge());
-                        assertThat(animalList.getRace()).isEqualTo(animal.getRace());
-                        assertThat(animalList.getType()).isEqualTo(animal.getType());
-                        assertThat(animalList.getGuardianId()).isEqualTo(animal.getGuardianId());
+                    for (Animal item : resp) {
+                        assertThat(item.getName()).isEqualTo(animal.getName());
+                        assertThat(item.getAge()).isEqualTo(animal.getAge());
+                        assertThat(item.getRace()).isEqualTo(animal.getRace());
+                        assertThat(item.getType()).isEqualTo(animal.getType());
+                        assertThat(item.getGuardianId()).isEqualTo(animal.getGuardianId());
                     }
                 });
 
@@ -137,5 +141,4 @@ public class AnimalControllerTest extends PostgreSQLContainerTest {
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
     }
-
 }

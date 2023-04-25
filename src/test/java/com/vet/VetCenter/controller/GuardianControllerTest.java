@@ -68,6 +68,7 @@ public class GuardianControllerTest extends PostgreSQLContainerTest {
     public void shouldFindAllGuardian() throws Exception {
         Guardian guardian = VetCenterData.getGuardian();
         service.create(guardian);
+        service.create(guardian);
 
         mvc.perform(MockMvcRequestBuilders
                         .get("/guardian")
@@ -77,9 +78,9 @@ public class GuardianControllerTest extends PostgreSQLContainerTest {
                     String contentAsString = mvcResult.getResponse().getContentAsString();
                     List<Guardian> resp = objectMapper.readValue(contentAsString, new TypeReference<List<Guardian>>() {
                     });
-                    for (Guardian guardianList : resp) {
+                    assertThat(resp.size()).isEqualTo(2);
 
-                        assertThat(resp.get(0));
+                    for (Guardian guardianList : resp) {
                         assertThat(guardianList.getName()).isEqualTo(guardian.getName());
                         assertThat(guardianList.getCpf()).isEqualTo(guardian.getCpf());
                         assertThat(guardianList.getTelephone()).isEqualTo(guardian.getTelephone());

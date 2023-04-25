@@ -2,6 +2,7 @@ package com.vet.VetCenter.framework.controllers;
 
 import com.vet.VetCenter.application.ports.in.AnimalService;
 import com.vet.VetCenter.domain.entity.Animal;
+import com.vet.VetCenter.framework.adapters.in.dtos.filter.AnimalFilter;
 import com.vet.VetCenter.framework.adapters.in.dtos.request.AnimalRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,8 +20,8 @@ public class AnimalController {
     private AnimalService service;
 
     @GetMapping
-    public List<Animal> listAll() {
-        return service.findAll();
+    public List<Animal> listAll(AnimalFilter filter) {
+        return service.findAll(filter);
     }
 
     @GetMapping("/{id}")

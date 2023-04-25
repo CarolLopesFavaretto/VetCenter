@@ -86,6 +86,7 @@ public class ConsultationControllerTest extends PostgreSQLContainerTest {
     public void shouldFindAllConsultation() throws Exception {
         Consultation consultation = VetCenterData.getConsultation();
         service.create(consultation);
+        service.create(consultation);
 
         mvc.perform(MockMvcRequestBuilders
                         .get("/consultation")
@@ -95,16 +96,16 @@ public class ConsultationControllerTest extends PostgreSQLContainerTest {
                     String contentAsString = mvcResult.getResponse().getContentAsString();
                     List<Consultation> resp = objectMapper.readValue(contentAsString, new TypeReference<List<Consultation>>() {
                     });
-                    for (Consultation consultationList : resp) {
+                    assertThat(resp.size()).isEqualTo(2);
 
-                        assertThat(resp.get(0));
-                        assertThat(consultationList.getNameVeterinary()).isEqualTo(consultation.getNameVeterinary());
-                        assertThat(consultationList.getCause()).isEqualTo(consultation.getCause());
-                        assertThat(consultationList.getValue()).isEqualTo(consultation.getValue());
-                        assertThat(consultationList.getObservations()).isEqualTo(consultation.getObservations());
-                        assertThat(consultationList.getDate()).isEqualTo(consultation.getDate());
-                        assertThat(consultationList.getRegress()).isEqualTo(consultation.getRegress());
-                        assertThat(consultationList.getAnimalId()).isEqualTo(consultation.getAnimalId());
+                    for (Consultation item : resp) {
+                        assertThat(item.getNameVeterinary()).isEqualTo(consultation.getNameVeterinary());
+                        assertThat(item.getCause()).isEqualTo(consultation.getCause());
+                        assertThat(item.getValue()).isEqualTo(consultation.getValue());
+                        assertThat(item.getObservations()).isEqualTo(consultation.getObservations());
+                        assertThat(item.getDate()).isEqualTo(consultation.getDate());
+                        assertThat(item.getRegress()).isEqualTo(consultation.getRegress());
+                        assertThat(item.getAnimalId()).isEqualTo(consultation.getAnimalId());
                     }
                 });
     }

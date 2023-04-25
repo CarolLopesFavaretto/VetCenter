@@ -3,6 +3,7 @@ package com.vet.VetCenter.application.services;
 import com.vet.VetCenter.application.ports.in.AnimalService;
 import com.vet.VetCenter.application.ports.out.AnimalRepository;
 import com.vet.VetCenter.domain.entity.Animal;
+import com.vet.VetCenter.framework.adapters.in.dtos.filter.AnimalFilter;
 import com.vet.VetCenter.framework.adapters.in.dtos.mappers.AnimalMapper;
 import com.vet.VetCenter.framework.adapters.in.dtos.request.AnimalRequest;
 import com.vet.VetCenter.framework.exceptions.ResourceNotFoundException;
@@ -29,8 +30,8 @@ public class AnimalServiceImpl implements AnimalService {
     }
 
     @Override
-    public List<Animal> findAll() {
-        return repository.findAll();
+    public List<Animal> findAll(AnimalFilter filter) {
+        return repository.findAll(filter);
     }
 
     @Override

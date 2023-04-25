@@ -21,7 +21,7 @@ public class VetCenterData {
     public static Animal getAnimal() {
         Animal animal = new Animal();
         animal.setId(1L);
-        animal.setName("Marie");
+        animal.setName("Maria");
         animal.setAge(11);
         animal.setType("felino");
         animal.setRace("Tomba Lata");

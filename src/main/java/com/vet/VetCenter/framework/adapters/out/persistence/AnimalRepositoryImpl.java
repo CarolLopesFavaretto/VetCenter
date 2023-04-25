@@ -2,13 +2,16 @@ package com.vet.VetCenter.framework.adapters.out.persistence;
 
 import com.vet.VetCenter.application.ports.out.AnimalRepository;
 import com.vet.VetCenter.domain.entity.Animal;
+import com.vet.VetCenter.framework.adapters.in.dtos.filter.AnimalFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Repository
@@ -27,9 +30,15 @@ public class AnimalRepositoryImpl implements AnimalRepository {
     }
 
     @Override
-    public List<Animal> findAll() {
-        return namedParameterJdbcTemplate.query("select id, name, age, type, race, guardian_id " +
-                        "from animal",
+    public List<Animal> findAll(AnimalFilter filter) {
+        Map<String, Object> mapSqlParameterSource = new HashMap<>();
+        mapSqlParameterSource.put("name", filter.getName());
+        mapSqlParameterSource.put("guardian_id", filter.getGuardianId());
+
+        return namedParameterJdbcTemplate.query("select * " +
+                        "from animal where (:name is null or name = :name) "
+                        + "and  (:guardian_id is null or guardian_id = :guardian_id) "
+                , mapSqlParameterSource,
                 ((rs, rowNum) ->
                         new Animal(
                                 rs.getLong("id"),

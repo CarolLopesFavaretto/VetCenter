@@ -1,6 +1,7 @@
 package com.vet.VetCenter.application.ports.in;
 
 import com.vet.VetCenter.domain.entity.Animal;
+import com.vet.VetCenter.framework.adapters.in.dtos.filter.AnimalFilter;
 import com.vet.VetCenter.framework.adapters.in.dtos.request.AnimalRequest;
 
 import java.util.List;
@@ -11,7 +12,7 @@ public interface AnimalService {
 
     void create(Animal request);
 
-    List<Animal> findAll();
+    List<Animal> findAll(AnimalFilter filter);
 
     Optional<Animal> findById(Long id);
 

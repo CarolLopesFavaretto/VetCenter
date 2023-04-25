@@ -5,6 +5,7 @@ import com.vet.VetCenter.application.ports.out.GuardianRepository;
 import com.vet.VetCenter.config.PostgreSQLContainerTest;
 import com.vet.VetCenter.data.VetCenterData;
 import com.vet.VetCenter.domain.entity.Animal;
+import com.vet.VetCenter.framework.adapters.in.dtos.filter.AnimalFilter;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -45,7 +46,7 @@ public class AnimalRepositoryTest extends PostgreSQLContainerTest {
 
 //      buscando registros inseridos
 
-        List<Animal> animalList = repository.findAll();
+        List<Animal> animalList = repository.findAll(new AnimalFilter());
         Assert.assertEquals(1, animalList.size());
         Animal animalDb = animalList.get(0);
         Assert.assertEquals(animalDb.getName(), animal.getName());
