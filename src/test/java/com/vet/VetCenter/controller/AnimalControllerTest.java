@@ -41,6 +41,7 @@ public class AnimalControllerTest extends PostgreSQLContainerTest {
     @Before
     public void init() {
         guardianService.create(VetCenterData.getGuardian());
+        guardianService.create(VetCenterData.getGuardian());
     }
 
     @Test
@@ -80,13 +81,14 @@ public class AnimalControllerTest extends PostgreSQLContainerTest {
         Animal animal = VetCenterData.getAnimal();
         service.create(animal);
         animal.setName("Marie");
+        animal.setGuardianId(2L);
         service.create(animal);
         service.create(animal);
 
         mvc.perform(MockMvcRequestBuilders
                         .get("/animal")
                         .param("name", "Marie")
-                        .param("guardianId", "1")
+                        .param("guardianId", "2")
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(mvcResult -> {

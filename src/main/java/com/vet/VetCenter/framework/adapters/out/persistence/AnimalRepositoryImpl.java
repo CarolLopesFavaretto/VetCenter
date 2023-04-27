@@ -36,8 +36,8 @@ public class AnimalRepositoryImpl implements AnimalRepository {
         mapSqlParameterSource.put("guardian_id", filter.getGuardianId());
 
         return namedParameterJdbcTemplate.query("select * " +
-                        "from animal where (:name is null or name = :name) "
-                        + "and  (:guardian_id is null or guardian_id = :guardian_id) "
+                        "from animal where ( cast(:name as varchar) is null or name = :name) "
+                        + "and  ( cast(:guardian_id as numeric) is null or guardian_id = :guardian_id) "
                 , mapSqlParameterSource,
                 ((rs, rowNum) ->
                         new Animal(
