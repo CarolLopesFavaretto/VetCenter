@@ -1,6 +1,7 @@
 package com.vet.VetCenter.application.ports.in;
 
 import com.vet.VetCenter.domain.entity.Prescription;
+import com.vet.VetCenter.framework.adapters.in.dtos.filter.PrescriptionFilter;
 import com.vet.VetCenter.framework.adapters.in.dtos.request.PrescriptionRequest;
 
 import java.util.List;
@@ -10,7 +11,7 @@ public interface PrescriptionService {
 
     void create(Prescription prescription);
 
-    List<Prescription> findAll();
+    List<Prescription> findAll(PrescriptionFilter filter);
 
     Optional<Prescription> findById(Long id);
 

@@ -3,6 +3,7 @@ package com.vet.VetCenter.application.services;
 import com.vet.VetCenter.application.ports.in.PrescriptionService;
 import com.vet.VetCenter.application.ports.out.PrescriptionRepository;
 import com.vet.VetCenter.domain.entity.Prescription;
+import com.vet.VetCenter.framework.adapters.in.dtos.filter.PrescriptionFilter;
 import com.vet.VetCenter.framework.adapters.in.dtos.mappers.PrescriptionMapper;
 import com.vet.VetCenter.framework.adapters.in.dtos.request.PrescriptionRequest;
 import com.vet.VetCenter.framework.exceptions.ResourceNotFoundException;
@@ -28,8 +29,8 @@ public class PrescriptionServiceImpl implements PrescriptionService {
     }
 
     @Override
-    public List<Prescription> findAll() {
-        return repository.findAll();
+    public List<Prescription> findAll(PrescriptionFilter filter) {
+        return repository.findAll(filter);
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.vet.VetCenter.framework.controllers;
 
 import com.vet.VetCenter.application.ports.in.GuardianService;
 import com.vet.VetCenter.domain.entity.Guardian;
+import com.vet.VetCenter.framework.adapters.in.dtos.filter.GuardianFilter;
 import com.vet.VetCenter.framework.adapters.in.dtos.request.GuardianRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,8 +21,8 @@ public class GuardianController {
     private GuardianService guardianService;
 
     @GetMapping
-    public List<Guardian> listAll() {
-        return guardianService.findAll();
+    public List<Guardian> listAll(GuardianFilter filter) {
+        return guardianService.findAll(filter);
     }
 
     @GetMapping("/{id}")

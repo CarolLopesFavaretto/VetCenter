@@ -3,6 +3,7 @@ package com.vet.VetCenter.application.services;
 import com.vet.VetCenter.application.ports.in.GuardianService;
 import com.vet.VetCenter.application.ports.out.GuardianRepository;
 import com.vet.VetCenter.domain.entity.Guardian;
+import com.vet.VetCenter.framework.adapters.in.dtos.filter.GuardianFilter;
 import com.vet.VetCenter.framework.adapters.in.dtos.mappers.GuardianMapper;
 import com.vet.VetCenter.framework.adapters.in.dtos.request.GuardianRequest;
 import com.vet.VetCenter.framework.exceptions.ResourceNotFoundException;
@@ -28,8 +29,8 @@ public class GuardianServiceImpl implements GuardianService {
     }
 
     @Override
-    public List<Guardian> findAll() {
-        return repository.findAll();
+    public List<Guardian> findAll(GuardianFilter filter) {
+        return repository.findAll(filter);
     }
 
     @Override

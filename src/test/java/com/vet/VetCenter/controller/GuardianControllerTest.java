@@ -68,10 +68,15 @@ public class GuardianControllerTest extends PostgreSQLContainerTest {
     public void shouldFindAllGuardian() throws Exception {
         Guardian guardian = VetCenterData.getGuardian();
         service.create(guardian);
+        guardian.setName("Diana");
+        guardian.setTelephone(11947759525L);
+        service.create(guardian);
         service.create(guardian);
 
         mvc.perform(MockMvcRequestBuilders
                         .get("/guardian")
+                        .param("name", "Diana")
+                        .param("telephone", String.valueOf(11947759525L))
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(mvcResult -> {

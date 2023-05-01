@@ -2,13 +2,16 @@ package com.vet.VetCenter.framework.adapters.out.persistence;
 
 import com.vet.VetCenter.application.ports.out.ConsultationRepository;
 import com.vet.VetCenter.domain.entity.Consultation;
+import com.vet.VetCenter.framework.adapters.in.dtos.filter.ConsultationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Repository
@@ -28,10 +31,14 @@ public class ConsultationRepositoryImpl implements ConsultationRepository {
     }
 
     @Override
-    public List<Consultation> findAll() {
+    public List<Consultation> findAll(ConsultationFilter filter) {
+        Map<String, Object> mapSqlParameterSource = new HashMap<>();
+        mapSqlParameterSource.put("name_veterinary", filter.getNameVeterinary());
+        mapSqlParameterSource.put("animal_id", filter.getAnimalId());
 
-        return namedParameterJdbcTemplate.query("select id, name_veterinary, value, cause, observations, date, " +
-                        "regress, animal_id from consultation",
+        return namedParameterJdbcTemplate.query("select * from consultation " +
+                        " where ( cast (:name_veterinary as varchar) is null or name_veterinary = :name_veterinary) and " +
+                        "( cast (:animal_id as numeric) is null or animal_id = :animal_id)", mapSqlParameterSource,
                 ((rs, rowNum) ->
                         new Consultation(
                                 rs.getLong("id"),

@@ -7,6 +7,7 @@ import com.vet.VetCenter.application.ports.out.PrescriptionRepository;
 import com.vet.VetCenter.config.PostgreSQLContainerTest;
 import com.vet.VetCenter.data.VetCenterData;
 import com.vet.VetCenter.domain.entity.Prescription;
+import com.vet.VetCenter.framework.adapters.in.dtos.filter.PrescriptionFilter;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -51,7 +52,7 @@ public class PrescriptionRepositoryTest extends PostgreSQLContainerTest {
 
 //      buscando registros inseridos
 
-        List<Prescription> prescriptions = repository.findAll();
+        List<Prescription> prescriptions = repository.findAll(new PrescriptionFilter());
         Assert.assertEquals(1, prescriptions.size());
         Prescription prescriptionDb = prescriptions.get(0);
         Assert.assertEquals(prescriptionDb.getMedication(), prescription.getMedication());

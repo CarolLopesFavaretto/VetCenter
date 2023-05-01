@@ -1,6 +1,7 @@
 package com.vet.VetCenter.application.ports.in;
 
 import com.vet.VetCenter.domain.entity.Guardian;
+import com.vet.VetCenter.framework.adapters.in.dtos.filter.GuardianFilter;
 import com.vet.VetCenter.framework.adapters.in.dtos.request.GuardianRequest;
 
 import java.util.List;
@@ -11,7 +12,7 @@ public interface GuardianService {
 
     void create(Guardian guardian);
 
-    List<Guardian> findAll();
+    List<Guardian> findAll(GuardianFilter filter);
 
     Optional<Guardian> findById(Long id);
 

@@ -86,10 +86,15 @@ public class ConsultationControllerTest extends PostgreSQLContainerTest {
     public void shouldFindAllConsultation() throws Exception {
         Consultation consultation = VetCenterData.getConsultation();
         service.create(consultation);
+        consultation.setNameVeterinary("Maria");
+        consultation.setAnimalId(2L);
+        service.create(consultation);
         service.create(consultation);
 
         mvc.perform(MockMvcRequestBuilders
                         .get("/consultation")
+                        .param("nameVeterinary", "Maria")
+                        .param("animalId", String.valueOf(2L))
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(mvcResult -> {

@@ -2,6 +2,7 @@ package com.vet.VetCenter.framework.controllers;
 
 import com.vet.VetCenter.application.ports.in.PrescriptionService;
 import com.vet.VetCenter.domain.entity.Prescription;
+import com.vet.VetCenter.framework.adapters.in.dtos.filter.PrescriptionFilter;
 import com.vet.VetCenter.framework.adapters.in.dtos.request.PrescriptionRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,8 +20,8 @@ public class PrescriptionController {
     private PrescriptionService service;
 
     @GetMapping
-    public List<Prescription> findAll() {
-        return service.findAll();
+    public List<Prescription> findAll(PrescriptionFilter filter) {
+        return service.findAll(filter);
     }
 
     @GetMapping("/{id}")

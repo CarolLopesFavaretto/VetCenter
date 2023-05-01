@@ -4,6 +4,7 @@ import com.vet.VetCenter.application.ports.out.GuardianRepository;
 import com.vet.VetCenter.config.PostgreSQLContainerTest;
 import com.vet.VetCenter.data.VetCenterData;
 import com.vet.VetCenter.domain.entity.Guardian;
+import com.vet.VetCenter.framework.adapters.in.dtos.filter.GuardianFilter;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,7 +34,7 @@ public class GuardianRepositoryTest extends PostgreSQLContainerTest {
 
 //      Buscando registros inseridos
 
-        List<Guardian> guardianList = repository.findAll();
+        List<Guardian> guardianList = repository.findAll(new GuardianFilter());
         Assert.assertEquals(1, guardianList.size());
         Guardian guardianDb = guardianList.get(0);
         Assert.assertEquals(guardianDb.getName(), guardian.getName());

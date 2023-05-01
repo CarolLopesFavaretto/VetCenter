@@ -1,6 +1,7 @@
 package com.vet.VetCenter.application.ports.in;
 
 import com.vet.VetCenter.domain.entity.Consultation;
+import com.vet.VetCenter.framework.adapters.in.dtos.filter.ConsultationFilter;
 import com.vet.VetCenter.framework.adapters.in.dtos.request.ConsultationRequest;
 
 import java.util.List;
@@ -10,7 +11,7 @@ public interface ConsultationService {
 
     void create(Consultation consultation);
 
-    List<Consultation> findAll();
+    List<Consultation> findAll(ConsultationFilter filter);
 
     Optional<Consultation> findById(Long id);
 

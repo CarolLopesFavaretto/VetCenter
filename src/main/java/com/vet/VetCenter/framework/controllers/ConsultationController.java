@@ -2,6 +2,7 @@ package com.vet.VetCenter.framework.controllers;
 
 import com.vet.VetCenter.application.ports.in.ConsultationService;
 import com.vet.VetCenter.domain.entity.Consultation;
+import com.vet.VetCenter.framework.adapters.in.dtos.filter.ConsultationFilter;
 import com.vet.VetCenter.framework.adapters.in.dtos.request.ConsultationRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,8 +21,8 @@ public class ConsultationController {
 
 
     @GetMapping
-    public List<Consultation> findAll() {
-        return service.findAll();
+    public List<Consultation> findAll(ConsultationFilter filter) {
+        return service.findAll(filter);
     }
 
     @GetMapping("/{id}")

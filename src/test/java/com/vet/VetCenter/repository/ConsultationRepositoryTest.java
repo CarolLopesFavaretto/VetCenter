@@ -6,6 +6,7 @@ import com.vet.VetCenter.application.ports.out.GuardianRepository;
 import com.vet.VetCenter.config.PostgreSQLContainerTest;
 import com.vet.VetCenter.data.VetCenterData;
 import com.vet.VetCenter.domain.entity.Consultation;
+import com.vet.VetCenter.framework.adapters.in.dtos.filter.ConsultationFilter;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -45,7 +46,7 @@ public class ConsultationRepositoryTest extends PostgreSQLContainerTest {
 
 //      buscando registros inseridos
 
-        List<Consultation> consultationList = repository.findAll();
+        List<Consultation> consultationList = repository.findAll(new ConsultationFilter());
         Assert.assertEquals(1, consultationList.size());
         Consultation consultationDb = consultationList.get(0);
         Assert.assertEquals(consultationDb.getNameVeterinary(), consultation.getNameVeterinary());

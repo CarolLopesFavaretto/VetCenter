@@ -3,6 +3,7 @@ package com.vet.VetCenter.application.services;
 import com.vet.VetCenter.application.ports.in.ConsultationService;
 import com.vet.VetCenter.application.ports.out.ConsultationRepository;
 import com.vet.VetCenter.domain.entity.Consultation;
+import com.vet.VetCenter.framework.adapters.in.dtos.filter.ConsultationFilter;
 import com.vet.VetCenter.framework.adapters.in.dtos.mappers.ConsultationMapper;
 import com.vet.VetCenter.framework.adapters.in.dtos.request.ConsultationRequest;
 import com.vet.VetCenter.framework.exceptions.ResourceNotFoundException;
@@ -28,8 +29,8 @@ public class ConsultationServiceImpl implements ConsultationService {
     }
 
     @Override
-    public List<Consultation> findAll() {
-        return repository.findAll();
+    public List<Consultation> findAll(ConsultationFilter filter) {
+        return repository.findAll(filter);
     }
 
     @Override

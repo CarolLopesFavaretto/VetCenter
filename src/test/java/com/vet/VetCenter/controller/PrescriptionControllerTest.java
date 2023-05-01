@@ -87,18 +87,24 @@ public class PrescriptionControllerTest extends PostgreSQLContainerTest {
     public void shouldFindAllPrescription() throws Exception {
         Prescription prescription = VetCenterData.getPrescription();
         service.create(prescription);
+        prescription.setMedication("Prednisolona");
+        prescription.setConsultationId(2L);
+        service.create(prescription);
+        service.create(prescription);
 
         mvc.perform(MockMvcRequestBuilders
                         .get("/prescription")
+                        .param("medication", "Prednisolona")
+                        .param("consultationId", String.valueOf(2L))
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(mvcResult -> {
                     String contentAsString = mvcResult.getResponse().getContentAsString();
                     List<Prescription> resp = objectMapper.readValue(contentAsString, new TypeReference<List<Prescription>>() {
                     });
+                    assertThat(resp.size()).isEqualTo(2);
                     for (Prescription prescriptionList : resp) {
 
-                        assertThat(resp.get(0));
                         assertThat(prescriptionList.getMedication()).isEqualTo(prescription.getMedication());
                         assertThat(prescriptionList.getDate()).isEqualTo(prescription.getDate());
                         assertThat(prescriptionList.getConsultationId()).isEqualTo(prescription.getConsultationId());
@@ -111,7 +117,7 @@ public class PrescriptionControllerTest extends PostgreSQLContainerTest {
         Prescription prescription = VetCenterData.getPrescription();
         service.create(prescription);
 
-        mvc.perform(MockMvcRequestBuilders.put("/prescription/{id}", 4)
+        mvc.perform(MockMvcRequestBuilders.put("/prescription/{id}", 3)
                         .content(objectMapper.writeValueAsString(prescription))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -124,7 +130,7 @@ public class PrescriptionControllerTest extends PostgreSQLContainerTest {
         service.create(prescription);
 
         mvc.perform(MockMvcRequestBuilders
-                        .get("/prescription/{id}", 5)
+                        .get("/prescription/{id}", 7)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
     }
