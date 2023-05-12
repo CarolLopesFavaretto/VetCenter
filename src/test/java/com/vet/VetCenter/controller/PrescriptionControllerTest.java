@@ -46,8 +46,9 @@ public class PrescriptionControllerTest extends PostgreSQLContainerTest {
     @Autowired
     private PrescriptionService service;
 
+
     @Before
-    public void init() {
+    void init() {
         guardianService.create(VetCenterData.getGuardian());
         animalService.create(VetCenterData.getAnimal());
         consultationService.create(VetCenterData.getConsultation());

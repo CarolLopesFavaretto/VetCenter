@@ -6,6 +6,7 @@ import com.vet.VetCenter.application.ports.out.GuardianRepository;
 import com.vet.VetCenter.application.ports.out.ReportConsultationsRepository;
 import com.vet.VetCenter.config.PostgreSQLContainerTest;
 import com.vet.VetCenter.data.VetCenterData;
+import com.vet.VetCenter.domain.entity.Prescription;
 import com.vet.VetCenter.framework.adapters.in.dtos.dto.ReportConsultations;
 import com.vet.VetCenter.framework.adapters.in.dtos.filter.ReportConsultationsFilter;
 import org.junit.Assert;
@@ -46,8 +47,15 @@ public class ReportConsultationsRepositoryTest extends PostgreSQLContainerTest {
     @Test
     public void runTestFindAllReportsConsultations() {
 
+        ReportConsultations reportConsultations = VetCenterData.getReport();
+
         List<ReportConsultations> reportConsultationsList = repository.findAll(new ReportConsultationsFilter());
         Assert.assertEquals(1, reportConsultationsList.size());
+        ReportConsultations  reportDb = reportConsultationsList.get(0);
+        Assert.assertEquals(reportDb.getNameGuardian(), reportConsultations.getNameGuardian());
+        Assert.assertEquals(reportDb.getDate(), reportConsultations.getDate());
+        Assert.assertEquals(reportDb.getNameAnimal(), reportConsultations.getNameAnimal());
+        Assert.assertEquals(reportDb.getNameVeterinary(), reportConsultations.getNameVeterinary());
 
     }
 }
