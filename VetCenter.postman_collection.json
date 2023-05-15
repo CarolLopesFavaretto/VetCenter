@@ -1,0 +1,555 @@
+{
+	"info": {
+		"_postman_id": "841808e3-e94e-48b7-9904-1c43349e69b4",
+		"name": "VetCenter",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16789706"
+	},
+	"item": [
+		{
+			"name": "Guardian",
+			"item": [
+				{
+					"name": "Created Guardian",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Maria\",\r\n    \"cpf\": \"41246532808\",\r\n    \"telephone\": \"1140543188\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/guardian",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"guardian"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Updated Guardian",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Maria\",\r\n    \"cpf\": \"40046532809\",\r\n    \"telephone\": \"1140543188\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/guardian/18",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"guardian",
+								"18"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindAll Guardian",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/guardian",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"guardian"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/guardian/9",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"guardian",
+								"9"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Animal",
+			"item": [
+				{
+					"name": "Created Animal",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"lili\",\r\n    \"age\": \"2\",\r\n    \"type\": \"canino\",\r\n    \"race\": \"golden\",\r\n    \"guardianId\": \"2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/animal",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"animal"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Updated Animal",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"lili\",\r\n    \"age\": \"2\",\r\n    \"type\": \"canino\",\r\n    \"race\": \"golden\",\r\n    \"guardianId\": \"1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/animal/15",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"animal",
+								"15"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindAll Animal",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/animal",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"animal"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/animal/10",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"animal",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Animal",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/animal/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"animal",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Consultation",
+			"item": [
+				{
+					"name": "Created Consultation",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nameVeterinary\": \"Aline\",\r\n    \"value\": \"40\",\r\n    \"cause\": \"canino\",\r\n    \"observations\": \"golden\",\r\n    \"date\":\"2023-04-20\",\r\n    \"regress\": \"true\",\r\n    \"animalId\": \"10\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/consultation",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"consultation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Updated Consultation",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nameVeterinary\": \"Maria\",\r\n    \"value\": \"50\",\r\n    \"cause\": \"canino\",\r\n    \"observations\": \"golden\",\r\n    \"date\":\"2023-04-20\",\r\n    \"regress\": \"false\",\r\n    \"animalId\": \"2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/consultation/20",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"consultation",
+								"20"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindAll Consultation",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/consultation",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"consultation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/consultation/4",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"consultation",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Consultation",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/consultation/3",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"consultation",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Prescription",
+			"item": [
+				{
+					"name": "Created Prescription",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"medication\": \"dipirona\",\r\n    \"date\":\"2023-04-20\",\r\n    \"consultationId\": \"6\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/prescription",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"prescription"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Updated Prescription",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"medication\": \"prednisolona\",\r\n    \"date\":\"2023-04-20\",\r\n    \"consultationId\": \"6\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/prescription/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"prescription",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindAll Prescription",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/prescription",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"prescription"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/prescription/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"prescription",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Prescription",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/prescription/3",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"prescription",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Report Consultations",
+			"item": [
+				{
+					"name": "Find All Reports Consultations",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/report/consultations?nameAnimal=lili&nameVeterinary=Aline&nameGuardian=Maria",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"report",
+								"consultations"
+							],
+							"query": [
+								{
+									"key": "nameAnimal",
+									"value": "lili"
+								},
+								{
+									"key": "nameVeterinary",
+									"value": "Aline"
+								},
+								{
+									"key": "nameGuardian",
+									"value": "Maria"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Report Prescriptions",
+			"item": [
+				{
+					"name": "Find All Reports Consultations",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/report/prescriptions?nameAnimal=lili&nameVeterinary=Aline&medication=dipirona",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"report",
+								"prescriptions"
+							],
+							"query": [
+								{
+									"key": "nameAnimal",
+									"value": "lili"
+								},
+								{
+									"key": "nameVeterinary",
+									"value": "Aline"
+								},
+								{
+									"key": "medication",
+									"value": "dipirona"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
