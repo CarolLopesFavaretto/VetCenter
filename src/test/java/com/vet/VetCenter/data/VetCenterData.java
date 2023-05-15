@@ -5,6 +5,7 @@ import com.vet.VetCenter.domain.entity.Consultation;
 import com.vet.VetCenter.domain.entity.Guardian;
 import com.vet.VetCenter.domain.entity.Prescription;
 import com.vet.VetCenter.framework.adapters.in.dtos.dto.ReportConsultations;
+import com.vet.VetCenter.framework.adapters.in.dtos.dto.ReportPrescription;
 
 import java.time.LocalDate;
 
@@ -68,5 +69,19 @@ public class VetCenterData {
         reportConsultations.setObservations(getConsultation().getObservations());
         reportConsultations.setRegress(getConsultation().getRegress());
         return reportConsultations;
+    }
+
+    public static ReportPrescription getReportPrescriptions() {
+        ReportPrescription reportPrescription = new ReportPrescription();
+        reportPrescription.setNameGuardian(getGuardian().getName());
+        reportPrescription.setCpf(getGuardian().getCpf());
+        reportPrescription.setTelephone(getGuardian().getTelephone());
+        reportPrescription.setNameAnimal(getAnimal().getName());
+        reportPrescription.setNameVeterinary(getConsultation().getNameVeterinary());
+        reportPrescription.setCause(getConsultation().getCause());
+        reportPrescription.setObservations(getConsultation().getObservations());
+        reportPrescription.setMedication(getPrescription().getMedication());
+        reportPrescription.setDate(getPrescription().getDate());
+        return reportPrescription;
     }
 }
